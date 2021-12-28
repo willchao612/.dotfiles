@@ -1,0 +1,54 @@
+# Author: Will Chao <nerdzzh@gmail.com>
+# Last Change: 12/27/2021 07:23:50 PM +0800
+
+bind r source-file ~/.tmux.conf
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind s split-window -h
+bind i split-window -v
+unbind-key -T copy-mode-vi Escape
+bind-key -T copy-mode-vi Escape send-keys -X cancel
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi V send-keys -X select-line
+bind -T copy-mode-vi r send-keys -X rectangle-toggle
+bind -T copy-mode-vi y send-keys -X copy-selection
+
+# List of plugins
+set -g @plugin 'willchao612/tmux-gruvbox'
+  set -g @tmux-gruvbox 'dark'
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+  set -g @prefix_highlight_bg 'colour66'
+  set -g @prefix_highlight_fg 'colour239'
+set -g @plugin 'tmux-plugins/tmux-open'
+  set -g @open-S 'https://www.google.com/search?q='
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+set -sg escape-time 0
+set -g default-command /usr/bin/fish
+set -g default-shell /usr/bin/fish
+set -g default-terminal "screen-256color"
+set -g prefix C-Space
+set -g focus-events on
+set -g base-index 1
+set -g history-limit 10000
+set -g set-titles on
+set -g status-keys vi
+set -g status-interval 2
+set -g mouse on
+set -wg mode-keys vi
+set -wg monitor-activity on
+set -wg automatic-rename on
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'

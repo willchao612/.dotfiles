@@ -1,0 +1,5 @@
+backup/
+tmp/
+*.spl
+config/fish/*
+!config/fish/config.fish
