@@ -1,5 +1,5 @@
 # Author: Will Chao <nerdzzh@gmail.com>
-# Last Change: 12/27/2021 07:13:10 PM +0800
+# Last Change: 12/28/2021 05:19:44 PM +0800
 
 # Clear that annoying greeting message
 set -U fish_greeting ''
@@ -53,8 +53,8 @@ if type -q fzf
   end
 end
 
-if test -e $OMF_CONFIG/init.fish
-  alias so='source $OMF_CONFIG/init.fish'
+if test -e $HOME/.config/fish/config.fish
+  alias so='source $HOME/.config/fish/config.fish'
 end
 
 if type -q git
@@ -62,9 +62,14 @@ if type -q git
 end
 
 if type -q nvim
+  set -gx EDITOR nvim
   alias v='nvim'
   alias vi='nvim'
   alias vim='nvim'
+end
+
+if type -q htop
+  alias h='htop'
 end
 
 if type -q ranger

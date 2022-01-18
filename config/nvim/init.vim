@@ -1,5 +1,5 @@
 " Author: Will Chao <nerdzzh@gmail.com>
-" Last Change: 12/26/2021 09:35:33 PM +0800
+" Last Change: 01/09/2022 02:41:31 PM +0800
 
 " "Nighttime is the guardian of creativity."
 
@@ -656,13 +656,13 @@ set modelines=0
 set mouse=a
 set nonumber
 set norelativenumber
+set noshowmode
 set scrolloff=3
 set shell=/usr/bin/fish
 set shiftwidth=4
 set shortmess+=Ics
 set showbreak=↪
 set showcmd
-set showmode
 set sidescroll=1
 set sidescrolloff=10
 set smartcase
@@ -752,7 +752,7 @@ nnoremap \s :setl spell!<CR>
 
 nnoremap <Leader>ec :CocConfig<CR>
 nnoremap <Leader>ed :e ~/.config/nvim/custom-dictionary.utf-8.add<CR>
-nnoremap <Leader>ef :e $OMF_CONFIG/init.fish<CR>
+nnoremap <Leader>ef :e ~/.config/fish/config.fish<CR>
 nnoremap <Leader>eg :e ~/.gitconfig<CR>
 nnoremap <Leader>et :e ~/.tmux.conf<CR>
 nnoremap <Leader>ev :e $MYVIMRC<CR>
