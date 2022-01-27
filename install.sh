@@ -45,6 +45,7 @@ packages=(
   "peco"
   "ranger"
   "tig"
+  "tldr"
   "tmux"
   "xsel"
 )
@@ -80,10 +81,24 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing fish plugin manager.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher && fisher update"
 
-fish -c "fisher install oh-my-fish/theme-robbyrussell"
-fish -c "fisher install jethrokuan/z"
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing ranger plugins.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+ranger_plugins=(
+  "alexanderjeurissen/ranger_devicons"
+  "maximtrp/ranger-archives"
+)
+
+for i in "${ranger_plugins[@]}"
+do
+  if [ ! -d "$HOME/.config/ranger/plugins/$(basename $i)" ]; then
+    git clone "https://github.com/$i" ~/.config/ranger/plugins/$(basename $i)
+    echo "---------------------------------------------------------"
+  fi
+done
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Switching shell to fish. You may need to logout.$(tput sgr 0)"

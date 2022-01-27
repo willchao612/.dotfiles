@@ -32,7 +32,7 @@ done
 
 for config in $INSTALLDIR/config/*; do
   target=$HOME/.config/$(basename $config)
-  if [ ! -L $target ]; then
+  if [ ! -L $target ] && [ -d $target ]; then
     echo "---------------------------------------------------------"
     echo "$(tput setaf 2)JARVIS: Backing up $target.$(tput sgr 0)"
     echo "---------------------------------------------------------"
