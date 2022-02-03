@@ -18,7 +18,7 @@ mkdir -p $BACKUP_DIR
 linkables=$(find -H "$INSTALLDIR" -maxdepth 3 -name '*.symlink')
 for file in $linkables; do
   target="$HOME/.$(basename $file '.symlink')"
-  if [ ! -L $target ]; then
+  if [ ! -L $target ] && [ -f $target ]; then
     echo "---------------------------------------------------------"
     echo "$(tput setaf 2)JARVIS: Backing up $target.$(tput sgr 0)"
     echo "---------------------------------------------------------"

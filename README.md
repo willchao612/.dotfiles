@@ -6,22 +6,14 @@ Currently I am on a Ubuntu 20.04 PC.
 
 [https://github.com/ctaylo21/jarvis](https://github.com/ctaylo21/jarvis)
 
-## nerd fonts
-
-- [Hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
-- [FiraCode](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip)
-- [SourceCodePro](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip)
-
 ## homebrew
 
 - bat
 - curl
 - exa
 - fd
-- fish
 - fzf (`/home/linuxbrew/.linuxbrew/opt/fzf/install`)
 - gcc
-- ghq
 - git
 - htop
 - neovim
@@ -29,9 +21,12 @@ Currently I am on a Ubuntu 20.04 PC.
 - node
 - peco
 - ranger
+- ripgrep
 - tig
+- tldr
 - tmux
 - xsel
+- zsh
 
 ## npm
 
@@ -41,10 +36,6 @@ Currently I am on a Ubuntu 20.04 PC.
 ## python
 
 [https://www.anaconda.com/products/individual#linux](https://www.anaconda.com/products/individual#linux)
-
-## tmux
-
-[how to build tmux from source](https://nerdzzh.me/2021/10/23/build-tmux-from-source-and-use-tpm-tmux-plugin-manager/#build-tmux-from-source)
 
 ## nvim
 
@@ -60,9 +51,6 @@ pip install --upgrade pynvim
 # spell
 sudo apt install wamerican
 
-# ack.vim
-brew install ack the_silver_searcher
-
 # coc.nvim
 brew install llvm
 
@@ -74,9 +62,6 @@ npm install -g jsctags
 brew install tidy-html5 shfmt
 npm install -g clang-format prettier lua-fmt
 pip install --upgrade autopep8 pycodestyle
-
-# fzf
-brew install bat fd
 ```
 
 ## others

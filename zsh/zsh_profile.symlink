@@ -1,0 +1,49 @@
+export XDG_CONFIG_HOME=$HOME/.config
+VIM="nvim"
+export EDITOR=$VIM
+
+export PATH=$PATH:$HOME/.local/bin
+
+# brew
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+# anaconda
+export PATH=$PATH:$HOME/anaconda3/bin
+
+# cuda
+export PATH=$PATH:/usr/local/cuda-11.1/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.1/lib64
+
+# java
+export JAVA_HOME=$(readlink -f $(which java) | sed "s#/jre/bin/java##")
+
+# ruby gems
+export GEM_HOME=$HOME/gems
+export PATH=$PATH:$GEM_HOME/bin
+
+# bat
+export BAT_THEME=gruvbox-dark
+export BAT_STYLE=plain
+
+# fzf
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+export FZF_CTRL_T_OPTS='--preview "bat -f {}"'
+export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
+
+if [ -x "$(command -v exa)" ]
+then
+  alias ls="exa --icons"
+  alias ll="exa --icons --long --group --links"
+  alias la="exa --icons --long --group --links --all"
+else
+  alias ls="ls -p"
+  alias ll="ls -l"
+  alias la="ls -A"
+fi
+
+alias g="git"
+alias v="nvim"
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
