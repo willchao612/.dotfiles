@@ -83,8 +83,16 @@ fi
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing zsh plugins.$(tput sgr 0)"
 echo "---------------------------------------------------------"
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
+
+zsh_plugins=( "zsh-autosuggestions" "zsh-syntax-highlighting" )
+
+for i in "${zsh_plugins[@]}"
+do
+  if [ ! -d "$HOME/.zsh/$(basename $i)" ]; then
+    git clone "https://github.com/zsh-users/$i" ~/.zsh/$(basename $i)
+    echo "---------------------------------------------------------"
+  fi
+done
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing tmux plugin manager.$(tput sgr 0)"

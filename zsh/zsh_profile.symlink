@@ -1,3 +1,5 @@
+setopt no_bang_hist
+
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 export EDITOR=$VIM
@@ -47,3 +49,4 @@ alias v="nvim"
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
