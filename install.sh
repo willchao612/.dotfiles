@@ -40,7 +40,6 @@ packages=(
   "neovim"
   "net-tools"
   "node"
-  "peco"
   "ranger"
   "ripgrep"
   "tig"

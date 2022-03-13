@@ -19,7 +19,6 @@ Currently I am on a Ubuntu 20.04 PC.
 - neovim
 - net-tools
 - node
-- peco
 - ranger
 - ripgrep
 - tig
