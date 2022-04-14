@@ -2,9 +2,12 @@ set -ga terminal-overrides ",xterm-256color*:Tc"
 
 unbind C-b
 set-option -g prefix C-space
+unbind \;
+bind-key \; command-prompt
 
-bind r source-file ~/.tmux.conf
-bind P capture-pane -S -3000 \; save-buffer ~/.tmux.history \; delete-buffer
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded!"
+bind P capture-pane -S -3000 \; save-buffer ~/.tmux.history \; delete-buffer \; neww "less ~/.tmux.history"
+bind R command-prompt -p "Enter Query:" "run-shell 'tmux neww gimmeaporn %%'"
 set -g base-index 1
 
 set-window-option -g mode-keys vi
@@ -13,10 +16,17 @@ bind -T copy-mode-vi V send-keys -X select-line
 bind -T copy-mode-vi r send-keys -X rectangle-toggle
 bind -T copy-mode-vi y send-keys -X copy-selection
 
+bind -r ^ last-window
+bind -r k select-pane -U
+bind -r j select-pane -D
+bind -r h select-pane -L
+bind -r l select-pane -R
+
 bind-key -r f run-shell "tmux neww tmux-sessionizer"
 bind-key -r i run-shell "tmux neww tmux-cht.sh"
 
 set-option -g mouse on
+set-option -g renumber-windows on
 set-window-option -g monitor-activity on
 set-window-option -g automatic-rename on
 
