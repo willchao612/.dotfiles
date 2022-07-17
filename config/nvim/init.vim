@@ -1,11 +1,23 @@
 " Author: Will Chao <nerdzzh@gmail.com>
-" Last Modified: Thursday, 03 February 2022
+" Last Modified: Wednesday, 08 June 2022
 
 let mapleader      = ','
 let maplocalleader = ';'
 
 " Plugin-related Settings ------------------ {{{
 
+" asyncrun.vim ------------- {{{
+
+nnoremap <Leader>A  :AsyncRun -mode=term -pos=floaterm<Space>
+
+nnoremap <Leader>ac :AsyncRun -mode=term -pos=floaterm gcc % -o test && ./test && rm test<CR>
+nnoremap <Leader>aC :AsyncRun -mode=term -pos=floaterm g++ % -o test && ./test && rm test<CR>
+nnoremap <Leader>ap :AsyncRun -mode=term -pos=floaterm python %<CR>
+nnoremap <Leader>al :AsyncRun -mode=term -pos=floaterm lua %<CR>
+nnoremap <Leader>ab :AsyncRun -mode=term -pos=floaterm chmod +x % && ./%<CR>
+nnoremap <Leader>aj :AsyncRun -mode=term -pos=floaterm node %<CR>
+
+" }}}
 " auto-pairs --------------- {{{
 
 let g:AutoPairsMapSpace = 0
@@ -29,6 +41,7 @@ aug end
 " coc.nvim ----------------- {{{
 
 let g:coc_global_extensions = [
+            \ 'coc-ci',
             \ 'coc-clangd',
             \ 'coc-css',
             \ 'coc-html',
@@ -46,13 +59,17 @@ let g:coc_global_extensions = [
             \ 'coc-yaml'
             \]
 
-nnoremap <Leader>cd <Plug>(coc-definition)
-nnoremap <Leader>cr <Plug>(coc-references)
+nmap <Leader>cd <Plug>(coc-definition)
+nmap <Leader>cr <Plug>(coc-references)
+
+nmap <silent> w <Plug>(coc-ci-w)
+nmap <silent> b <Plug>(coc-ci-b)
 
 " }}}
 " gruvbox ------------------ {{{
 
-let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_italic        = 1
 
 " }}}
 " gundo.vim ---------------- {{{
@@ -60,6 +77,11 @@ let g:gruvbox_italic = 1
 let g:gundo_prefer_python3 = 1
 
 nnoremap <Leader>ud :GundoToggle<CR>
+
+" }}}
+" indentLine --------------- {{{
+
+let g:indentLine_showFirstIndentLevel = 1
 
 " }}}
 " nerdtree ----------------- {{{
@@ -207,6 +229,8 @@ xmap ;c <Plug>Commentary
 " }}}
 " vim-diagon --------------- {{{
 
+let g:diagon_use_echo = 1
+
 noremap <Leader>D :Diagon<Space>
 noremap <Leader>dm :Diagon Math<CR>
 noremap <Leader>ds :Diagon Sequence<CR>
@@ -228,6 +252,7 @@ let g:floaterm_keymap_toggle = '<F8>'
 
 nnoremap <Leader>G :Git<Space>
 
+nnoremap <Leader>gL :0Gclog!<CR>
 nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader>gd :vert :Gdiffsplit<CR>
 nnoremap <Leader>gl :Gclog!<CR>
@@ -237,6 +262,21 @@ nnoremap <Leader>gs :Git<CR>
 
 nnoremap <Leader>gci :Git commit<CR>
 nnoremap <Leader>gco :Git checkout<Space>
+
+" }}}
+" vim-illuminate ----------- {{{
+
+let g:Illuminate_ftblacklist = ['nerdtree']
+let g:Illuminate_delay       = 500
+
+" }}}
+" vim-litecorrect ---------- {{{
+
+augroup litecorrect
+  autocmd!
+  autocmd FileType markdown,mkd call litecorrect#init()
+  autocmd FileType textile call litecorrect#init()
+augroup END
 
 " }}}
 " vim-markdown ------------- {{{
@@ -292,18 +332,9 @@ endif
 let g:polyglot_disabled = ['autoindent', 'coffee-script', 'markdown']
 
 " }}}
-" vim-run ------------------ {{{
-
-nnoremap ;r :Run<CR>
-nnoremap ;R :Run<Space>
-vnoremap ;r :RunV<CR>
-vnoremap ;R :RunV<Space>
-
-nnoremap <Leader>sd :RunDiff<CR>
-
-" }}}
 " vim-smoothie ------------- {{{
 
+let g:smoothie_enabled                     = 1
 let g:smoothie_update_interval             = 1
 let g:smoothie_speed_constant_factor       = 100
 let g:smoothie_speed_linear_factor         = 100
@@ -349,6 +380,7 @@ nnoremap <C-S>d :SDelete<CR>
 
 call plug#begin()
 
+Plug 'skywind3000/asyncrun.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'dkarter/bullets.vim'
 Plug 'rhysd/clever-f.vim'
@@ -369,21 +401,24 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'chiel92/vim-autoformat'
+Plug 'rlue/vim-barbaric'
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
 Plug 'willchao612/vim-diagon'
 Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/vim-grammarous'
+Plug 'RRethy/vim-illuminate'
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx', 'typescript'], 'do': 'make install' }
 Plug 'kevinoid/vim-jsonc'
+Plug 'preservim/vim-litecorrect'
 Plug 'plasticboy/vim-markdown'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'junegunn/vim-peekaboo'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
-Plug 'willchao612/vim-run'
 Plug 'psliwka/vim-smoothie'
 Plug 'honza/vim-snippets'
 Plug 'mhinz/vim-startify'
@@ -405,6 +440,9 @@ require('telescope').setup{
     mappings = {
       n = {
         ["q"] = actions.close
+      },
+      i = {
+        ["<C-q>"] = actions.send_to_qflist
       }
     },
     layout_config = {
@@ -419,7 +457,7 @@ EOF
 " }}}
 
 " }}}
-" Options ---------------------------------- {{{
+" Basic Configurations --------------------- {{{
 
 " Backups ------------------ {{{
 
@@ -451,14 +489,17 @@ set bg=dark
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " }}}
-" Cursorline --------------- {{{
-" Only show cursorline in current window and in normal mode.
+" Highlight spell ---------- {{{
+" Default spell highlighting does not look clear enough.
 
-aug cline
-    au!
-    au WinLeave,InsertEnter * set nocursorline
-    au WinEnter,InsertLeave * set cursorline
-aug end
+hi clear SpellBad
+hi SpellBad ctermfg=red ctermbg=NONE cterm=bold,underline guifg=red guibg=NONE gui=bold,underline
+hi clear SpellCap
+hi link SpellCap SpellBad
+hi clear SpellLocal
+hi link SpellLocal SpellBad
+hi clear SpellRare
+hi link SpellRare SpellBad
 
 " }}}
 " Highlight yank ----------- {{{
@@ -500,6 +541,33 @@ aug resized
 aug end
 
 " }}}
+" Show diff ---------------- {{{
+" Show current unsaved changes.
+
+function! ShowDiff() abort
+    if !filereadable(bufname('%')) || !&modified
+        return
+    endif
+
+    let l:diff_cmd = 'diff -u'
+    let l:temp_name = tempname()
+    execute 'silent w!' . l:temp_name
+    let l:diff_result = system(l:diff_cmd . ' ' . shellescape(bufname('%')) . ' ' . shellescape(l:temp_name))
+    call delete(l:temp_name)
+
+    vertical topleft new
+    setlocal buftype=nofile bufhidden=wipe nobuflisted nolist noswapfile nowrap cursorline modifiable nospell syntax=diff
+    nnoremap <silent> <buffer> q :q<CR>
+    call append(0, split(l:diff_result, '\n'))
+    setlocal nomodifiable
+
+    let name = '[Diff]'
+    silent! execute 'f' fnameescape(name)
+endfunction
+
+nnoremap <Leader>sd :call ShowDiff()<CR>
+
+" }}}
 " Timestamps --------------- {{{
 " Update timestamps upon saving if there are any.
 
@@ -533,7 +601,6 @@ aug end
 " Wildmenu ----------------- {{{
 
 set wildmenu
-set wildmode=list:longest
 
 set wildignore+=.git                           " version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " binary images
@@ -562,7 +629,7 @@ set hidden
 set hlsearch
 set ignorecase
 set incsearch
-set laststatus=2
+set laststatus=3
 set lazyredraw
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
@@ -598,16 +665,6 @@ function! EatChar(pat)
     let c = nr2char(getchar(0))
     return (c =~ a:pat) ? '' : c
 endfunction
-
-function! MakeSpacelessIabbrev(from, to)
-    execute "iabbrev <silent> ".a:from." ".a:to."<C-R>=EatChar('\\s')<CR>"
-endfunction
-function! MakeSpacelessBufferIabbrev(from, to)
-    execute "iabbrev <silent> <buffer> ".a:from." ".a:to."<C-R>=EatChar('\\s')<CR>"
-endfunction
-
-call MakeSpacelessIabbrev('nz/', 'http://nerdzzh.me/')
-call MakeSpacelessIabbrev('gh/', 'http://github.com/')
 
 iab nz@ nerdzzh@gmail.com
 iab nzn Will Chao
@@ -705,11 +762,16 @@ nnoremap \s :setl spell!<CR>
 " Toggle folds
 nnoremap <Space> za
 
+" Quickfix list navigation
+nnoremap <Leader>cn :cn<CR>zzzv
+nnoremap <Leader>cp :cp<CR>zzzv
+
 " }}}
 " Insert mode -------------- {{{
 
 " Exit insert mode
 inoremap jk <Esc>
+inoremap <C-C> <Esc>
 
 " Look up dictionary
 inoremap <C-L> <C-X><C-K>
@@ -804,15 +866,6 @@ onoremap r i{
 " }}}
 " FileType-specific Settings --------------- {{{
 
-" Blog --------------------- {{{
-
-aug ft_blog
-    au!
-    au BufRead,BufNewFile */_posts/*.md setl spell
-    au BufRead,BufNewFile */_drafts/*.md setl spell
-aug end
-
-" }}}
 " C ------------------------ {{{
 
 aug ft_c
@@ -882,11 +935,19 @@ aug ft_lua
 aug end
 
 " }}}
+" Make --------------------- {{{
+
+aug ft_make
+    au!
+    au FileType make setl softtabstop=2 shiftwidth=2
+aug end
+
+" }}}
 " Markdown ----------------- {{{
 
 aug ft_markdown
     au!
-    au FileType markdown setl softtabstop=2 shiftwidth=2 formatoptions+=B
+    au FileType markdown setl softtabstop=2 shiftwidth=2 formatoptions+=B spell
 
     au FileType markdown inorea <buffer> h1 #
     au FileType markdown inorea <buffer> h2 ##

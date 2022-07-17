@@ -2,7 +2,7 @@
     name = willchao612
     email = nerdzzh@gmail.com
 [alias]
-    a = "!git status --short | fzf | awk '{print $2}' | xargs git add"
+    a = "!git status --short | fzf -m | awk '{print $2}' | xargs git add"
     d = diff
 
     ba = branch -a

@@ -1,4 +1,8 @@
 {
     "javascript.suggestionActions.enabled": false,
-    "vetur.ignoreProjectWarning": true
+    "vetur.ignoreProjectWarning": true,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportInvalidStringEscapeSequence": "none",
+        "reportGeneralTypeIssues": "none"
+    }
 }
