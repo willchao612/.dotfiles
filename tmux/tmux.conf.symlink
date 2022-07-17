@@ -7,7 +7,6 @@ bind-key \; command-prompt
 
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded!"
 bind P capture-pane -S -3000 \; save-buffer ~/.tmux.history \; delete-buffer \; neww "less ~/.tmux.history"
-bind R command-prompt -p "Enter Query:" "run-shell 'tmux neww gimmeaporn %%'"
 set -g base-index 1
 
 set-window-option -g mode-keys vi
@@ -24,6 +23,7 @@ bind -r l select-pane -R
 
 bind-key -r f run-shell "tmux neww tmux-sessionizer"
 bind-key -r i run-shell "tmux neww tmux-cht.sh"
+bind-key -r g run-shell "tmux neww gimmeaporn"
 
 set-option -g mouse on
 set-option -g renumber-windows on

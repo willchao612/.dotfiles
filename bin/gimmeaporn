@@ -1,25 +1,12 @@
 #!/usr/bin/env bash
 
-IFS=$'\n'
-all=(`fd mp4 ~/Porn`)
+porndir="$HOME/Porn"
+girl=$(fd --maxdepth 1 --type d . $porndir --exec basename | sort | fzf)
 
-filtered=$all
-if [[ $# -ge 1 ]]
-then
-  filtered=()
-  for i in "$@"
-  do
-    tmp=(`printf "%s\n" "${all[@]}" | sed "\|$i|I!d"`)
-    filtered+=("${tmp[@]}")
-  done
-  filtered=(`printf "%s\n" "${filtered[@]}" | uniq`)
+if [[ -z $girl ]]; then
+  exit 0
 fi
-selected=${filtered[$RANDOM % ${#filtered[@]}]}
-# selected=`printf "%s\n" "${filtered[@]}" | fzf`
-# [[ -z "$selected" ]] && exit 1
 
-actress=`echo $selected | sed "s|^\./\([^/]*\)/.*|\1|"`
-vid=`echo $selected | sed "s|.*/\([^/]*\)\.mp4|\1|"`
-
-echo "Playing $vid by $actress..."
-mpv "$selected"
+film=$(fd --extension mp4 . "$porndir/$girl" | shuf | sed 1q)
+echo "Playing $(basename "$film") by $girl..."
+mpv "$film"
