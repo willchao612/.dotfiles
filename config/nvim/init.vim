@@ -1,5 +1,5 @@
 " Author: Will Chao <nerdzzh@gmail.com>
-" Last Modified: Wednesday, 08 June 2022
+" Last Modified: Tuesday, 19 July 2022
 
 let mapleader      = ','
 let maplocalleader = ';'
@@ -14,8 +14,9 @@ nnoremap <Leader>ac :AsyncRun -mode=term -pos=floaterm gcc % -o test && ./test &
 nnoremap <Leader>aC :AsyncRun -mode=term -pos=floaterm g++ % -o test && ./test && rm test<CR>
 nnoremap <Leader>ap :AsyncRun -mode=term -pos=floaterm python %<CR>
 nnoremap <Leader>al :AsyncRun -mode=term -pos=floaterm lua %<CR>
-nnoremap <Leader>ab :AsyncRun -mode=term -pos=floaterm chmod +x % && ./%<CR>
+nnoremap <Leader>as :AsyncRun -mode=term -pos=floaterm chmod +x % && ./%<CR>
 nnoremap <Leader>aj :AsyncRun -mode=term -pos=floaterm node %<CR>
+nnoremap <Leader>ar :AsyncRun -mode=term -pos=floaterm rustc % -o test && ./test && rm test<CR>
 
 " }}}
 " auto-pairs --------------- {{{
@@ -49,6 +50,7 @@ let g:coc_global_extensions = [
             \ 'coc-json',
             \ 'coc-lua',
             \ 'coc-pyright',
+            \ 'coc-rls',
             \ 'coc-sh',
             \ 'coc-snippets',
             \ 'coc-tsserver',
@@ -213,7 +215,7 @@ let g:formatters_zsh        = ['shfmt']
 
 aug format_on_save
     au!
-    au BufWritePre *.{html,css,scss,js,json,vue,lua,py,c,cpp}
+    au BufWritePre *.{html,css,scss,js,json,vue,lua,py,c,cpp,rs}
                 \   exe 'Autoformat'
                 \ | exe 'norm! zv'
 aug end
@@ -891,25 +893,17 @@ aug ft_css
 aug end
 
 " }}}
-" Fish --------------------- {{{
-
-aug ft_fish
-    au!
-    au FileType fish setl softtabstop=2 shiftwidth=2
-aug end
-
-" }}}
 " HTML --------------------- {{{
 
 aug ft_html
     au!
-    au FileType html setl softtabstop=2 shiftwidth=2 foldmethod=manual
+    au FileType html,xml setl softtabstop=2 shiftwidth=2 foldmethod=manual
 
     " Use ";f" to fold current tag
-    au FileType html nnoremap <buffer> <LocalLeader>f Vatzf
+    au FileType html,xml nnoremap <buffer> <LocalLeader>f Vatzf
 
     " Use ";i" to indent current tag
-    au FileType html nnoremap <buffer> <LocalLeader>i Vat=
+    au FileType html,xml nnoremap <buffer> <LocalLeader>i Vat=
 aug end
 
 " }}}
@@ -989,11 +983,22 @@ aug ft_qf
 aug end
 
 " }}}
+" Rust --------------------- {{{
+
+aug ft_rust
+    au!
+    au FileType rust setl softtabstop=4 shiftwidth=4 foldmethod=marker foldmarker={,}
+
+    " Use ";s" to add semicolon to eol
+    au FileType rust nnoremap <buffer> <LocalLeader>s A;<Esc>
+aug end
+
+" }}}
 " Sh ----------------------- {{{
 
 aug ft_sh
     au!
-    au FileType sh setl softtabstop=2 shiftwidth=2 foldmethod=marker foldmarker={{{,}}}
+    au FileType sh,zsh setl softtabstop=2 shiftwidth=2
 aug end
 
 " }}}
@@ -1030,33 +1035,11 @@ aug ft_vue
 aug end
 
 " }}}
-" XML ---------------------- {{{
-
-aug ft_xml
-    au!
-    au FileType xml setl softtabstop=2 shiftwidth=2 foldmethod=manual
-
-    " Use ";f" to fold current tag
-    au FileType xml nnoremap <buffer> <LocalLeader>f Vatzf
-
-    " Use ";i" to indent current tag
-    au FileType xml nnoremap <buffer> <LocalLeader>i Vat=
-aug end
-
-" }}}
 " YAML --------------------- {{{
 
 aug ft_yaml
     au!
     au FileType yaml setl softtabstop=2 shiftwidth=2 foldmethod=indent foldnestmax=2
-aug end
-
-" }}}
-" Zsh ---------------------- {{{
-
-aug ft_zsh
-    au!
-    au FileType zsh setl softtabstop=2 shiftwidth=2
 aug end
 
 " }}}

@@ -33,6 +33,10 @@ export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_CTRL_T_OPTS='--preview "bat -f {}"'
 export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
 
+# rust
+export CARGO_HOME=$HOME/.cargo
+export PATH=$PATH:$CARGO_HOME/bin
+
 if [ -x "$(command -v exa)" ]
 then
   alias ls="exa --icons"

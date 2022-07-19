@@ -52,6 +52,7 @@ sudo apt install wamerican
 
 # coc.nvim
 brew install llvm
+rustup component add rls rust-analysis rust-src
 
 # tagbar
 brew install universal-ctags
