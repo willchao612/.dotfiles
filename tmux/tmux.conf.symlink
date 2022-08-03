@@ -41,12 +41,8 @@ set -g @open-S 'https://www.google.com/search?q='
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-capture-pane-contents 'on'
 
-set -g @plugin 'willchao612/tmux-gruvbox'
+set -g @plugin 'egel/tmux-gruvbox'
 set -g @tmux-gruvbox 'dark'
-
-set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
-set -g @prefix_highlight_bg 'colour66'
-set -g @prefix_highlight_fg 'colour239'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'

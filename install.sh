@@ -12,8 +12,7 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Checking for Homebrew installation.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 brew="/home/linuxbrew/.linuxbrew/bin/brew"
-if [ -f "$brew" ]
-then
+if [ -f "$brew" ]; then
   echo "---------------------------------------------------------"
   echo "$(tput setaf 2)JARVIS: Homebrew is installed.$(tput sgr 0)"
   echo "---------------------------------------------------------"
@@ -40,6 +39,7 @@ packages=(
   "neovim"
   "net-tools"
   "node"
+  "python3"
   "ranger"
   "ripgrep"
   "tig"
@@ -49,8 +49,7 @@ packages=(
   "zsh"
 )
 
-for i in "${packages[@]}"
-do
+for i in "${packages[@]}"; do
   brew install $i
   echo "---------------------------------------------------------"
 done
@@ -59,7 +58,7 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Python NeoVim client.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-pip install --upgrade neovim
+pip3 install --upgrade neovim
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing node neovim package$(tput sgr 0)"
@@ -83,10 +82,9 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing zsh plugins.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-zsh_plugins=( "zsh-autosuggestions" "zsh-syntax-highlighting" )
+zsh_plugins=("zsh-autosuggestions" "zsh-syntax-highlighting")
 
-for i in "${zsh_plugins[@]}"
-do
+for i in "${zsh_plugins[@]}"; do
   if [ ! -d "$HOME/.zsh/$(basename $i)" ]; then
     git clone "https://github.com/zsh-users/$i" ~/.zsh/$(basename $i)
     echo "---------------------------------------------------------"
@@ -111,8 +109,7 @@ ranger_plugins=(
   "maximtrp/ranger-archives"
 )
 
-for i in "${ranger_plugins[@]}"
-do
+for i in "${ranger_plugins[@]}"; do
   if [ ! -d "$HOME/.config/ranger/plugins/$(basename $i)" ]; then
     git clone "https://github.com/$i" ~/.config/ranger/plugins/$(basename $i)
     echo "---------------------------------------------------------"
