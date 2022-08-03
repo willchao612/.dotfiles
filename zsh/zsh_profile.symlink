@@ -3,14 +3,12 @@ setopt no_bang_hist
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 export EDITOR=$VIM
+export DOTFILES=$HOME/Personal/.dotfiles
 
 export PATH=$PATH:$HOME/.local/bin
 
 # brew
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-# anaconda
-export PATH=$PATH:$HOME/anaconda3/bin
 
 # cuda
 export PATH=$PATH:/usr/local/cuda-11.1/bin
@@ -51,6 +49,45 @@ fi
 alias g="git"
 alias v="nvim"
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
+# vi mode
+bindkey -v
+export KEYTIMEOUT=20
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^h' backward-delete-char
+bindkey -M viins '^u' kill-whole-line
+bindkey -M viins '^k' kill-line
+bindkey -M viins '^w' backward-delete-word
+
+bindkey -M vicmd 'H' vi-beginning-of-line
+bindkey -M vicmd 'L' vi-end-of-line
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+  case $KEYMAP in
+    vicmd) echo -ne '\e[1 q';;      # block
+    viins|main) echo -ne '\e[5 q';; # beam
+  esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+  zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+  echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+bindkey -s '^b' '^ubc -lq\n'
+bindkey -s '^f' '^ucd "$(dirname "$(fzf)")"\n'
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh 2>/dev/null

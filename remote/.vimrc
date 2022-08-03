@@ -1,267 +1,23 @@
 " Author: Will Chao <nerdzzh@gmail.com>
-" Last Modified: Tuesday, 02 August 2022
+" Last Modified: Wednesday, 03 August 2022
 
 let mapleader      = ','
 let maplocalleader = ';'
 
-" Plugin-related Settings ------------------ {{{
+filetype plugin indent on
+syntax enable
 
-" gruvbox ------------------ {{{
-
-let g:gruvbox_contrast_dark      = 'hard'
-let g:gruvbox_italic             = 1
-let g:gruvbox_italicize_comments = 1
-let g:gruvbox_sign_column        = 'bg0'
-let g:gruvbox_transparent_bg     = 1
-
-" }}}
-" kommentary --------------- {{{
-
-let g:kommentary_create_default_mappings = v:false
-
-" }}}
-" neoformat ---------------- {{{
-
-let g:neoformat_basic_format_align = 1
-let g:neoformat_basic_format_retab = 1
-let g:neoformat_basic_format_trim  = 1
-let g:neoformat_try_node_exe       = 1
-let g:shfmt_opt                    = "-ci"
-
-let g:neoformat_enabled_c          = ['clangformat']
-let g:neoformat_enabled_cpp        = ['clangformat']
-let g:neoformat_enabled_css        = ['prettier']
-let g:neoformat_enabled_html       = ['prettier']
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_enabled_json       = ['prettier']
-let g:neoformat_enabled_less       = ['prettier']
-let g:neoformat_enabled_lua        = ['stylua']
-let g:neoformat_enabled_markdown   = ['prettier']
-let g:neoformat_enabled_python     = ['yapf']
-let g:neoformat_enabled_rust       = ['rustfmt']
-let g:neoformat_enabled_scss       = ['prettier']
-let g:neoformat_enabled_sh         = ['shfmt']
-let g:neoformat_enabled_vue        = ['prettier']
-let g:neoformat_enabled_zsh        = ['shfmt']
-
-augroup fmt
-    autocmd!
-    autocmd BufWritePre *.{c,cpp,css,html,js,json,less,lua,py,rs,scss,sh,vue,zsh} Neoformat
-augroup END
-
-nnoremap <Leader>F <Cmd>Neoformat<CR>
-
-" }}}
-" sparkup ------------------ {{{
-
-let g:sparkupNextMapping = '<C-S>'
-
-autocmd FileType javascript,vue runtime ftplugin/html/sparkup.vim
-
-" }}}
-" tabular ------------------ {{{
-
-map ;a= :Tabularize /=<CR>
-map ;a: :Tabularize /:<CR>
-
-" }}}
-" vim-diagon --------------- {{{
-
-let g:diagon_use_echo = 1
-
-noremap <Leader>D :Diagon<Space>
-noremap <Leader>dm :Diagon Math<CR>
-noremap <Leader>ds :Diagon Sequence<CR>
-noremap <Leader>dt :Diagon Tree<CR>
-
-" }}}
-" vim-fugitive ------------- {{{
-
-nnoremap <Leader>G :Git<Space>
-
-nnoremap <Leader>gb :Git blame<CR>
-nnoremap <Leader>gd :vert :Gdiffsplit<CR>
-nnoremap <Leader>go :GBrowse<CR>
-nnoremap <Leader>gp :Git push<CR>
-nnoremap <Leader>gs :Git<CR>
-
-nnoremap <Leader>gci :Git commit<CR>
-nnoremap <Leader>gco :Git checkout<Space>
-
-" }}}
-" vim-litecorrect ---------- {{{
-
-augroup litecorrect
-    autocmd!
-    autocmd FileType markdown,mkd call litecorrect#init()
-    autocmd FileType textile call litecorrect#init()
-augroup END
-
-" }}}
-" vim-markdown ------------- {{{
-
-let g:vim_markdown_folding_disabled        = 1
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_toc_autofit             = 1
-let g:vim_markdown_conceal                 = 0
-let g:tex_conceal                          = ""
-let g:vim_markdown_math                    = 1
-let g:vim_markdown_conceal_code_blocks     = 0
-let g:vim_markdown_frontmatter             = 1
-let g:vim_markdown_strikethrough           = 1
-let g:vim_markdown_new_list_item_indent    = 0
-
-fu! s:MarkdownTocWinToggle()
-    if index(['markdown', 'qf'], &filetype) == -1
-        return
-    endif
-
-    if get(getloclist(0, {'winid': 0}), 'winid', 0)
-        " location window is open
-        lclose
-    else
-        " location window is not open
-        Toch
-    endif
-endfu
-
-command! TocToggle call <SID>MarkdownTocWinToggle()
-nnoremap <Leader>to :TocToggle<CR>
-
-" }}}
-" vim-markdown-toc --------- {{{
-
-let g:vmt_auto_update_on_save = 1
-let g:vmt_fence_text          = 'TOC START'
-let g:vmt_fence_closing_text  = 'TOC END'
-let g:vmt_list_item_char      = '-'
-
-" }}}
-" vim-matchup -------------- {{{
-
-let g:matchup_matchparen_offscreen = {}
-
-" }}}
-" vim-mundo ---------------- {{{
-
-let g:mundo_right = 1
-
-nnoremap <silent> <Leader>ud :MundoToggle<CR>
-
-" }}}
-" vim-plug ----------------- {{{
-
-" let g:plug_url_format = 'https://git::@github.com.cnpmjs.org/%s.git'
-
-if has('nvim')
-    let g:plug_home = stdpath('data') . '/plugged'
-endif
-
-" }}}
-
-" }}}
-" Plugged ---------------------------------- {{{
-
-call plug#begin()
-
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rhysd/clever-f.vim'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'hrsh7th/cmp-path'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'j-hui/fidget.nvim'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'morhetz/gruvbox'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'neoclide/jsonc.vim'
-Plug 'b3nj5m1n/kommentary'
-Plug 'onsails/lspkind.nvim'
-Plug 'folke/lua-dev.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'sbdchd/neoformat'
-Plug 'karb94/neoscroll.nvim'
-Plug 'windwp/nvim-autopairs'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'SmiteshP/nvim-gps'
-Plug 'williamboman/nvim-lsp-installer'
-Plug 'neovim/nvim-lspconfig'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'RRethy/nvim-treesitter-textsubjects'
-Plug 'windwp/nvim-ts-autotag'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/persistence.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'rstacruz/sparkup', { 'rtp': 'vim/' }
-Plug 'lewis6991/spellsitter.nvim'
-Plug 'simrat39/symbols-outline.nvim'
-Plug 'godlygeek/tabular'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-telescope/telescope-symbols.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'folke/todo-comments.nvim'
-Plug 'akinsho/toggleterm.nvim'
-Plug 'folke/trouble.nvim'
-Plug 'rlue/vim-barbaric'
-Plug 'willchao612/vim-diagon'
-Plug 'tpope/vim-fugitive'
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx', 'typescript'], 'do': 'make install' }
-Plug 'preservim/vim-litecorrect'
-Plug 'plasticboy/vim-markdown'
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'andymass/vim-matchup'
-Plug 'simnalamburt/vim-mundo'
-Plug 'junegunn/vim-peekaboo'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-
-call plug#end()
-
-lua require('nerdzzh')
-
-" }}}
 " Basic Configurations --------------------- {{{
 
 " Backups ------------------ {{{
 
-set backup                                     " enable backups
-set noswapfile                                 " it's 2021, Vim.
+set backup
+set noswapfile
+set undodir=~/.vim/tmp/undo//
 
-set undodir  =~/.config/nvim/tmp/undo//        " undo files
-set backupdir=~/.config/nvim/tmp/backup//      " backups
-set directory=~/.config/nvim/tmp/swap//        " swap files
-
-" Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
     call mkdir(expand(&undodir), 'p')
 endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), 'p')
-endif
-if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), 'p')
-endif
-
-" }}}
-" Colorscheme -------------- {{{
-
-colorscheme gruvbox
-set bg=dark
-
-" Highlight VCS conflick markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " }}}
 " Highlight spell ---------- {{{
@@ -277,17 +33,6 @@ hi clear SpellRare
 hi link SpellRare SpellBad
 
 " }}}
-" Highlight yank ----------- {{{
-" Nvim includes a function for highlighting a selection on yank
-
-if has('nvim')
-    aug highlight_yank
-        au!
-        au TextYankPost * silent! lua vim.highlight.on_yank() { timeout=300 }
-    aug end
-endif
-
-" }}}
 " Line return -------------- {{{
 " Make sure Vim returns to the same line when you reopen a file.
 
@@ -298,13 +43,6 @@ aug line_return
                 \     exe 'norm! g`"zvzz' |
                 \ endif
 aug end
-
-" }}}
-" Python ------------------- {{{
-" Python version and executable for Neovim
-
-set pyx=3
-let g:python3_host_prog = substitute(system('which python3'), '\n$', '', '')
 
 " }}}
 " Resize ------------------- {{{
@@ -394,9 +132,7 @@ set autowrite
 set backspace=indent,eol,start
 set colorcolumn=+1
 set complete=.,w,b,u,t
-set completeopt=menu,menuone,noselect
 set cursorline
-set dictionary=/usr/share/dict/words
 set encoding=utf-8
 set expandtab
 set foldlevelstart=0
@@ -405,7 +141,7 @@ set hidden
 set hlsearch
 set ignorecase
 set incsearch
-set laststatus=3
+set laststatus=2
 set lazyredraw
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
@@ -415,7 +151,6 @@ set noshowmode
 set number
 set relativenumber
 set scrolloff=3
-set shell=/usr/bin/zsh
 set shiftwidth=4
 set shortmess+=Ics
 set showbreak=↪
@@ -424,7 +159,6 @@ set sidescroll=1
 set sidescrolloff=10
 set smartcase
 set softtabstop=4
-set spellfile=~/.config/nvim/custom-dictionary.utf-8.add
 set splitbelow
 set splitright
 set tabstop=4
@@ -456,6 +190,7 @@ iab <expr> lhost 'http://localhost:'.EatChar('\s')
 " }}}
 " Mappings --------------------------------- {{{
 
+runtime macros/matchit.vim
 map <Tab> %
 
 " Normal mode -------------- {{{
@@ -475,12 +210,8 @@ nnoremap <C-O> <C-O>zzzv
 nnoremap <C-[> <C-I>zzzv
 nnoremap <C-]> <C-]>zzzv
 
-nnoremap <Leader>ed :e ~/.config/nvim/custom-dictionary.utf-8.add<CR>
-nnoremap <Leader>eg :e ~/.gitconfig<CR>
-nnoremap <Leader>et :e ~/.tmux.conf<CR>
+nnoremap <Leader>eb :e ~/.bashrc<CR>
 nnoremap <Leader>ev :e $MYVIMRC<CR>
-nnoremap <Leader>ez :e ~/.zsh_profile<CR>
-nnoremap <Leader>el :e ~/.config/nvim/lua/nerdzzh/init.lua<CR>
 
 nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>:noh<CR>
 
@@ -524,9 +255,6 @@ nnoremap K :q<CR>
 
 " Man
 nnoremap M K
-
-" Clean carriage-return (mainly in WSL)
-nnoremap <silent> <Leader>M mz:let _s=@/<CR>:%s/<C-V><C-M>$//e<CR>:noh<CR>:let @/=_s<CR>`z
 
 " Format current line
 nnoremap \q gqq

@@ -19,6 +19,7 @@ Currently I am on a Ubuntu 20.04 PC.
 - neovim
 - net-tools
 - node
+- python3
 - ranger
 - ripgrep
 - tig
@@ -32,41 +33,30 @@ Currently I am on a Ubuntu 20.04 PC.
 - commitizen
 - cz-conventional-changelog (`echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc`)
 
-## python
-
-[https://www.anaconda.com/products/individual#linux](https://www.anaconda.com/products/individual#linux)
-
 ## nvim
 
-```sh
+```bash
 # vim-plug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # :checkhealth
 npm install -g neovim
-pip install --upgrade pynvim
+pip3 install --upgrade pynvim
 
 # spell
 sudo apt install wamerican
 
-# coc.nvim
-brew install llvm
-rustup component add rls rust-analysis rust-src
-
-# tagbar
-brew install universal-ctags
-npm install -g jsctags
-
-# vim-autoformat
-brew install tidy-html5 shfmt
-npm install -g clang-format prettier lua-fmt
-pip install --upgrade autopep8 pycodestyle
+# neoformat
+brew install stylua shfmt
+npm install -g clang-format prettier
+pip3 install --upgrade yapf
+rustup component add rustfmt
 ```
 
 ## others
 
-```sh
+```bash
 # jekyll
 sudo apt install ruby-full build-essential zlib1g-dev
 gem install jekyll jekyll-paginate bundler
