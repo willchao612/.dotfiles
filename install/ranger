@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing ranger plugins.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+ranger_plugins=(
+  "alexanderjeurissen/ranger_devicons"
+  "maximtrp/ranger-archives"
+)
+
+for i in "${ranger_plugins[@]}"; do
+  if [ ! -d "$HOME/.config/ranger/plugins/$(basename $i)" ]; then
+    git clone "https://github.com/$i" ~/.config/ranger/plugins/$(basename $i)
+    echo "---------------------------------------------------------"
+  fi
+done

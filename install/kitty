@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing kitty terminal emulator.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+if ! command -v kitty &> /dev/null ; then
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+fi

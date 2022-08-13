@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Checking for Homebrew installation.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+brew="/home/linuxbrew/.linuxbrew/bin/brew"
+if [ -f "$brew" ]; then
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 2)JARVIS: Homebrew is installed.$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+else
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 3)JARVIS: Installing Homebrew. Homebrew requires osx command lines tools, please download xcode first$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing system packages.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+packages=(
+  "bat"
+  "curl"
+  "exa"
+  "fd"
+  "fzf"
+  "gcc"
+  "git"
+  "htop"
+  "neovim"
+  "net-tools"
+  "node"
+  "python3"
+  "ranger"
+  "ripgrep"
+  "tig"
+  "tldr"
+  "tmux"
+  "xsel"
+  "zsh"
+)
+
+for i in "${packages[@]}"; do
+  brew install $i
+  echo "---------------------------------------------------------"
+done

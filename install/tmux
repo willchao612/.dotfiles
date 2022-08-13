@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing tmux plugin manager.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+fi

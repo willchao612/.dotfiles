@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing oh-my-zsh.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+else
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 2)JARVIS: oh-my-zsh already installed.$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+fi
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing zsh plugins.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+zsh_plugins=("zsh-autosuggestions" "zsh-syntax-highlighting")
+
+for i in "${zsh_plugins[@]}"; do
+  if [ ! -d "$HOME/.zsh/$(basename $i)" ]; then
+    git clone "https://github.com/zsh-users/$i" ~/.zsh/$(basename $i)
+    echo "---------------------------------------------------------"
+  fi
+done
