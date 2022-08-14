@@ -1,4 +1,7 @@
-require("nvim-treesitter.configs").setup {
+local ok, config = pcall(require, "nvim-treesitter.configs")
+if not ok then return end
+
+config.setup {
   ensure_installed = "all",
   sync_install = false,
   highlight = {
@@ -18,20 +21,20 @@ require("nvim-treesitter.configs").setup {
     swap = {
       enable = true,
       swap_next = {
-        ["gp"] = "@parameter.inner",
+        ["gpn"] = "@parameter.inner",
       },
       swap_previous = {
-        ["gP"] = "@parameter.inner",
+        ["gpp"] = "@parameter.inner",
       },
     },
     move = {
       enable = true,
       set_jumps = true,
       goto_next_start = {
-        ["gf"] = "@function.outer",
+        ["gfn"] = "@function.outer",
       },
       goto_previous_start = {
-        ["gF"] = "@function.outer",
+        ["gfp"] = "@function.outer",
       },
     },
   },

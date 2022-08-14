@@ -1,0 +1,8 @@
+vim.cmd [[highlight clear SpellBad]]
+vim.cmd [[highlight link SpellBad WarningMsg]]
+vim.cmd [[highlight clear SpellCap]]
+vim.cmd [[highlight link SpellCap WarningMsg]]
+vim.cmd [[highlight clear SpellLocal]]
+vim.cmd [[highlight link SpellLocal WarningMsg]]
+vim.cmd [[highlight clear SpellRare]]
+vim.cmd [[highlight link SpellRare WarningMsg]]

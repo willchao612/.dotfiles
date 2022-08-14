@@ -1,7 +1,10 @@
+local ok, tree = pcall(require, "nvim-tree")
+if not ok then return end
+
 local Remap = require "nerdzzh.keymap"
 local nnoremap = Remap.nnoremap
 
-require("nvim-tree").setup {
+tree.setup {
   disable_netrw = true,
   open_on_setup = true,
   create_in_closed_folder = true,
@@ -11,6 +14,10 @@ require("nvim-tree").setup {
   reload_on_bufenter = true,
   update_focused_file = {
     enable = true,
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
   },
   renderer = {
     group_empty = true,
@@ -26,10 +33,6 @@ require("nvim-tree").setup {
       },
     },
   },
-  actions = {
-    open_file = {
-      quit_on_open = true,
-    },
-  },
 }
-nnoremap("<F2>", "<Cmd>NvimTreeToggle<CR>")
+
+nnoremap { "<F2>", "<Cmd>NvimTreeToggle<CR>" }

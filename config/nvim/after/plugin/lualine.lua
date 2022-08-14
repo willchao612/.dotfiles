@@ -1,6 +1,10 @@
-local gps = require "nvim-gps"
-require("nvim-gps").setup {}
-require("lualine").setup {
+local ok, lualine = pcall(require, "lualine")
+if not ok then return end
+
+local navic = require "nvim-navic"
+navic.setup { depth_limit = 4 }
+
+lualine.setup {
   options = {
     theme = "gruvbox",
     globalstatus = true,
@@ -9,13 +13,12 @@ require("lualine").setup {
     lualine_a = { "buffers" },
     lualine_b = {},
     lualine_c = {},
-    lualine_x = { { gps.get_location, cond = gps.is_available } },
+    lualine_x = { { navic.get_location, cond = navic.is_available } },
     lualine_y = {},
     lualine_z = { "tabs" },
   },
   extensions = {
     "nvim-tree",
-    "fugitive",
     "quickfix",
     "man",
     "toggleterm",

@@ -1,4 +1,7 @@
-require("gitsigns").setup {
+local ok, signs = pcall(require, "gitsigns")
+if not ok then return end
+
+signs.setup {
   signs = {
     add = {
       hl = "GitSignsAdd",
@@ -42,14 +45,12 @@ require("gitsigns").setup {
       expr = true,
       "&diff ? '[c' : '<Cmd>lua require\"gitsigns\".prev_hunk()<CR>'",
     },
-    ["n ghs"] = '<Cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ["n ghu"] = '<Cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ["n ghr"] = '<Cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ["n ghR"] = '<Cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ["n ghp"] = '<Cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ["n ghb"] = '<Cmd>lua require"gitsigns".blame_line()<CR>',
+    ["n <Leader>gp"] = '<Cmd>lua require"gitsigns".preview_hunk()<CR>',
+    ["n <Leader>gb"] = '<Cmd>lua require"gitsigns".blame_line()<CR>',
+    ["n <Leader>gd"] = '<Cmd>lua require"gitsigns".diffthis()<CR>',
     -- Text objects
     ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
     ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
   },
+  current_line_blame = true,
 }

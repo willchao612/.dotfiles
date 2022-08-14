@@ -1,7 +1,10 @@
+local ok, term = pcall(require, "toggleterm")
+if not ok then return end
+
 local Remap = require "nerdzzh.keymap"
 local nnoremap = Remap.nnoremap
 
-require("toggleterm").setup {
+term.setup {
   open_mapping = "<F3>",
   direction = "float",
   close_on_exit = true,
@@ -19,11 +22,14 @@ local cmd_tbl = {
   lua = "lua %",
   python = "python3 %",
   rust = "rustc % -o test && ./test && rm test",
-  sh = "chmod +x % && %",
+  sh = "chmod +x % && bash %",
 }
 
-nnoremap("<F4>", function()
-  local ft = vim.bo.filetype
-  if cmd_tbl[ft] == nil then return end
-  vim.cmd([[7TermExec cmd="]] .. cmd_tbl[ft] .. [["]])
-end)
+nnoremap {
+  "<F4>",
+  function()
+    local ft = vim.bo.filetype
+    if cmd_tbl[ft] == nil then return end
+    vim.cmd([[7TermExec cmd="]] .. cmd_tbl[ft] .. [["]])
+  end,
+}

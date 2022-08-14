@@ -1,5 +1,8 @@
+local ok, colorizer = pcall(require, "colorizer")
+if not ok then return end
+
 vim.opt.termguicolors = true
-require("colorizer").setup({
+colorizer.setup({
   "css",
   "html",
   "less",
