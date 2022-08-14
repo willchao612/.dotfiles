@@ -1,6 +1,7 @@
 backup/
-tmp/
-sessions/
+packer_compiled.lua
 *.spl
+sessions/
+tmp/
 watch_later
 config/ranger/plugins
