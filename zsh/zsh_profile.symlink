@@ -35,8 +35,7 @@ export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
 export CARGO_HOME=$HOME/.cargo
 export PATH=$PATH:$CARGO_HOME/bin
 
-if [ -x "$(command -v exa)" ]
-then
+if [ -x "$(command -v exa)" ]; then
   alias ls="exa --icons"
   alias ll="exa --icons --long --group --links"
   alias la="exa --icons --long --group --links --all"
@@ -70,10 +69,10 @@ bindkey -M vicmd 'H' vi-beginning-of-line
 bindkey -M vicmd 'L' vi-end-of-line
 
 # Change cursor shape for different vi modes.
-function zle-keymap-select () {
+function zle-keymap-select() {
   case $KEYMAP in
-    vicmd) echo -ne '\e[1 q';;      # block
-    viins|main) echo -ne '\e[5 q';; # beam
+    vicmd) echo -ne '\e[1 q' ;;        # block
+    viins | main) echo -ne '\e[5 q' ;; # beam
   esac
 }
 zle -N zle-keymap-select
@@ -82,12 +81,11 @@ zle-line-init() {
   echo -ne "\e[5 q"
 }
 zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+echo -ne '\e[5 q'                # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
 
 bindkey -s '^b' '^ubc -lq\n'
 bindkey -s '^f' '^ucd "$(dirname "$(fzf)")"\n'
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh 2>/dev/null
