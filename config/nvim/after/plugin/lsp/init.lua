@@ -3,6 +3,7 @@ if not ok then return end
 
 local Remap = require "nerdzzh.keymap"
 local nnoremap = Remap.nnoremap
+local inoremap = Remap.inoremap
 
 -- Must be before any lspconfig setup
 require("nvim-lsp-installer").setup {
@@ -17,7 +18,7 @@ require("nvim-lsp-installer").setup {
   },
 }
 
-require("lua-dev").setup {} -- Vim API signature by @folke
+require("lua-dev").setup {} -- Vim API signature help support by @folke
 
 local config = function(_config)
   return vim.tbl_deep_extend("force", {
@@ -29,7 +30,9 @@ local config = function(_config)
       nnoremap { "gls", vim.lsp.buf.hover }
       nnoremap { "grr", vim.lsp.buf.rename }
 
-      -- Breadcrumb tabline used as a lualine component
+      inoremap { "<C-h>", vim.lsp.buf.signature_help }
+
+      -- Breadcrumb tabline as lualine component
       require("nvim-navic").attach(client, bufnr)
     end,
   }, _config or {})

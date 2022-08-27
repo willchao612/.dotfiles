@@ -63,4 +63,4 @@ nnoremap {
 nnoremap { "gld", builtin.lsp_definitions }
 nnoremap { "glr", builtin.lsp_references }
 
-nnoremap { "<Leader>gb", builtin.git_branches }
+nnoremap { "<Leader>gco", builtin.git_branches }
