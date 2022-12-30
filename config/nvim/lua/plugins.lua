@@ -1,6 +1,6 @@
 --[[
 Author: Will Chao <nerdzzh@gmail.com>
-Last Modified: Saturday, 13 August 2022
+Last Modified: Friday, 02 December 2022
 
 Credits: These neovim configs are hugely inspired by
   - @ThePrimeagen/.dotfiles
@@ -73,7 +73,7 @@ return require("packer").startup {
         { "williamboman/nvim-lsp-installer", module = "nvim-lsp-installer" },
         { "simrat39/symbols-outline.nvim", module = "symbols-outline" },
         { "j-hui/fidget.nvim", module = "fidget" },
-        { "folke/lua-dev.nvim", module = "lua-dev" },
+        { "folke/neodev.nvim", module = "neodev" },
       },
     }
 
