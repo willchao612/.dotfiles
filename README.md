@@ -1,4 +1,4 @@
-# [Will](https://nerdzzh.me/)'s dotfiles
+# [Will](https://nerdzzh.xyz/)'s dotfiles
 
 Currently I am on a Ubuntu 20.04 PC.
 

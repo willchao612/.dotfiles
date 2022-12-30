@@ -1,14 +1,17 @@
-source ~/.config/nvim/init.vim
+source ~/Personal/.dotfiles/remote/.vimrc
 nnoremap <Leader>ev :e ~/.ideavimrc<CR>
 nnoremap <Leader>sv :so ~/.ideavimrc<CR>
 
 " Plugins
 set NERDTree
-    nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
+
 set commentary
-    nmap ;c gcc
-    xmap ;c gc
+nmap ;c gcc
+xmap ;c gc
+
 set highlightedyank
-    let g:highlightedyank_highlight_duration = '300'
+let g:highlightedyank_highlight_duration = '300'
+
 set matchit
 set surround

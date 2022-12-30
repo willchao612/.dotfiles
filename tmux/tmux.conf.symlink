@@ -25,6 +25,8 @@ bind-key -r f run-shell "tmux neww tmux-sessionizer"
 bind-key -r i run-shell "tmux neww tmux-cht.sh"
 bind-key -r g run-shell "tmux neww gimmeaporn"
 
+bind-key -r C new-window -c "#{pane_current_path}"
+
 set-option -g mouse on
 set-option -g renumber-windows on
 set-window-option -g monitor-activity on
