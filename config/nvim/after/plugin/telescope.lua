@@ -64,3 +64,5 @@ nnoremap { "gld", builtin.lsp_definitions }
 nnoremap { "glr", builtin.lsp_references }
 
 nnoremap { "<Leader>gco", builtin.git_branches }
+
+nnoremap { "<Leader>/", builtin.current_buffer_fuzzy_find }

@@ -46,5 +46,7 @@ set -g @resurrect-capture-pane-contents "on"
 set -g @plugin "egel/tmux-gruvbox"
 set -g @tmux-gruvbox "dark"
 
+set -g @plugin "schasse/tmux-jump"
+
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run "~/.tmux/plugins/tpm/tpm"

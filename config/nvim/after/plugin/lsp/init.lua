@@ -5,17 +5,21 @@ local Remap = require "nerdzzh.keymap"
 local nnoremap = Remap.nnoremap
 local inoremap = Remap.inoremap
 
--- Must be before any lspconfig setup
-require("nvim-lsp-installer").setup {
-  automatic_installation = true,
+-- Mason needs to be configured before any lspconfig setup
+
+require("mason").setup {
   ui = {
     border = "single",
     icons = {
-      server_installed = "✓",
-      server_pending = "➜",
-      server_uninstalled = "✗",
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
     },
   },
+}
+
+require("mason-lspconfig").setup {
+  automatic_installation = true,
 }
 
 require("neodev").setup {} -- Vim API signature help support by @folke
@@ -50,7 +54,7 @@ lspconfig.tsserver.setup(config())
 lspconfig.vimls.setup(config())
 lspconfig.vuels.setup(config())
 
-lspconfig.sumneko_lua.setup(config {
+lspconfig.lua_ls.setup(config {
   settings = {
     Lua = {
       runtime = {
@@ -61,6 +65,8 @@ lspconfig.sumneko_lua.setup(config {
       },
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true),
+        -- HACK: https://github.com/neovim/nvim-lspconfig/issues/1700#issuecomment-1033127328
+        checkThirdParty = false,
       },
       telemetry = {
         enable = false,

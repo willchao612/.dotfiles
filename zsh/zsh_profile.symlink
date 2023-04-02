@@ -47,6 +47,7 @@ fi
 
 alias g="git"
 alias v="nvim"
+alias mux="tmuxinator"
 
 # vi mode
 bindkey -v

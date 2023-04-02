@@ -1,0 +1,7 @@
+name: Blog
+root: ~/Personal/willchao612.github.io/
+
+windows:
+  - editor: nvim _posts/
+  - server: bundle exec jekyll serve
+  - git status: tig

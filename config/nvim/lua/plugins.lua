@@ -1,6 +1,6 @@
 --[[
 Author: Will Chao <nerdzzh@gmail.com>
-Last Modified: Friday, 02 December 2022
+Last Modified: Saturday, 18 February 2023
 
 Credits: These neovim configs are hugely inspired by
   - @ThePrimeagen/.dotfiles
@@ -70,7 +70,8 @@ return require("packer").startup {
     use {
       "neovim/nvim-lspconfig",
       requires = {
-        { "williamboman/nvim-lsp-installer", module = "nvim-lsp-installer" },
+        { "williamboman/mason.nvim", module = "mason" },
+        { "williamboman/mason-lspconfig.nvim", module = "mason-lspconfig" },
         { "simrat39/symbols-outline.nvim", module = "symbols-outline" },
         { "j-hui/fidget.nvim", module = "fidget" },
         { "folke/neodev.nvim", module = "neodev" },
@@ -118,6 +119,13 @@ return require("packer").startup {
         "L3MON4D3/LuaSnip",
         "rafamadriz/friendly-snippets",
         { "windwp/nvim-autopairs", module = "nvim-autopairs" },
+        {
+          "uga-rosa/cmp-dictionary",
+          requires = { "nvim-lua/plenary.nvim" },
+          config = function()
+            vim.cmd [[autocmd FileType markdown CmpDictionaryUpdate]]
+          end,
+        },
       },
     }
 
@@ -142,8 +150,8 @@ return require("packer").startup {
         -- HACK: https://stackoverflow.com/a/67463224
         vim.cmd [[
           augroup format_on_save
-          autocmd!
-          autocmd BufWritePre *\(*.\(md\|markdown\)\)\@<! Neoformat
+            autocmd!
+            autocmd BufWritePre *\(*.\(md\|markdown\)\)\@<! Neoformat
           augroup END
         ]]
       end,
@@ -170,7 +178,7 @@ return require("packer").startup {
     use { "kyazdani42/nvim-tree.lua", module = "nvim-tree" }
     use { "lukas-reineke/indent-blankline.nvim", module = "indent_blankline" }
 
-    -- Plugins @folke created
+    -- Other goodies @folke created
     use { "folke/trouble.nvim", module = "trouble" }
     use { "folke/todo-comments.nvim", module = "todo-comments" }
     use { "folke/persistence.nvim", module = "persistence" }
@@ -261,7 +269,9 @@ return require("packer").startup {
       python_cmd = "python3",
     },
     display = {
-      open_fn = function() return require("packer.util").float { border = "single" } end,
+      open_fn = function()
+        return require("packer.util").float { border = "single" }
+      end,
       prompt_border = "single",
     },
   },

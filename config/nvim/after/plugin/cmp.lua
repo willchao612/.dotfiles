@@ -3,6 +3,7 @@ if not ok then return end
 
 local lspkind = require "lspkind"
 local luasnip = require "luasnip"
+local cmp_dict = require "cmp_dictionary"
 
 luasnip.config.set_config {
   history = false,
@@ -13,6 +14,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 local source_mapping = {
   buffer = "[Buffer]",
+  dictionary = "[Dict]",
   luasnip = "[Snip]",
   nvim_lsp = "[LSP]",
   nvim_lsp_signature_help = "[Help]",
@@ -59,6 +61,8 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = "buffer" },
+    { name = "dictionary" },
     { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "nvim_lsp_signature_help" },
@@ -78,3 +82,5 @@ cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = { { name = "cmdline" }, { name = "path" } },
 })
+
+cmp_dict.setup { first_case_insensitive = true }

@@ -70,6 +70,8 @@ nnoremap { "<Leader><S-Tab>", "gT" }
 
 nnoremap { "<Leader>r", ":%s/<C-r><C-w>//g<Left><Left>" }
 
+nnoremap { "<F5>", "<Cmd>checktime<CR>" }
+
 -- Insert mode
 inoremap { "jk", "<Esc>" }
 inoremap { "<C-c>", "<Esc>" }

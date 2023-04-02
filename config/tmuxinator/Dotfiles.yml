@@ -1,0 +1,5 @@
+name: Dotfiles
+root: ~/Personal/.dotfiles/
+
+windows:
+  - editor: nvim .

@@ -1,0 +1,7 @@
+name: Default
+root: ~
+
+windows:
+  - scratchpad:
+  - monitor: htop
+  - file system: ranger

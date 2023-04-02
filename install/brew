@@ -33,9 +33,11 @@ packages=(
   "python3"
   "ranger"
   "ripgrep"
+  "starship"
   "tig"
   "tldr"
   "tmux"
+  "tmuxinator"
   "xsel"
   "zsh"
 )

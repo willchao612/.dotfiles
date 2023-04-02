@@ -1,6 +1,6 @@
 # [Will](https://nerdzzh.xyz/)'s dotfiles
 
-Currently I am on a Ubuntu 20.04 PC.
+Currently I am on a Ubuntu 22.04 PC.
 
 ## credits
 
@@ -22,16 +22,19 @@ Currently I am on a Ubuntu 20.04 PC.
 - python3
 - ranger
 - ripgrep
+- starship
 - tig
 - tldr
 - tmux
+- tmuxinator
 - xsel
 - zsh
 
 ## npm
 
 - commitizen
-- cz-conventional-changelog (`echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc`)
+- cz-conventional-changelog
+  (`echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc`)
 
 ## nvim
 
