@@ -5,6 +5,8 @@ local lspkind = require "lspkind"
 local luasnip = require "luasnip"
 local cmp_dict = require "cmp_dictionary"
 
+lspkind.presets.default.Copilot = ""
+
 luasnip.config.set_config {
   history = false,
   update_events = "TextChanged,TextChangedI",
@@ -14,6 +16,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 local source_mapping = {
   buffer = "[Buffer]",
+  copilot = "[Copilot]",
   dictionary = "[Dict]",
   luasnip = "[Snip]",
   nvim_lsp = "[LSP]",
@@ -55,13 +58,14 @@ cmp.setup {
   formatting = {
     format = function(entry, vim_item)
       vim_item.kind = lspkind.presets.default[vim_item.kind]
-      local menu = source_mapping[entry.source.name]
-      vim_item.menu = menu
+      vim_item.menu = source_mapping[entry.source.name]
+      vim_item.kind_hl_group = "CmpItemKindDefault"
       return vim_item
     end,
   },
   sources = {
     { name = "buffer" },
+    { name = "copilot" },
     { name = "dictionary" },
     { name = "luasnip" },
     { name = "nvim_lsp" },

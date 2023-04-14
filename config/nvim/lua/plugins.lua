@@ -1,6 +1,6 @@
 --[[
 Author: Will Chao <nerdzzh@gmail.com>
-Last Modified: Saturday, 18 February 2023
+Last Modified: Wednesday, 12 April 2023
 
 Credits: These neovim configs are hugely inspired by
   - @ThePrimeagen/.dotfiles
@@ -125,6 +125,23 @@ return require("packer").startup {
           config = function()
             vim.cmd [[autocmd FileType markdown CmpDictionaryUpdate]]
           end,
+        },
+        -- Copilot
+        {
+          "zbirenbaum/copilot-cmp",
+          requires = {
+            {
+              "zbirenbaum/copilot.lua",
+              run = ":Copilot auth",
+              config = function()
+                require("copilot").setup {
+                  suggestion = { enabled = false },
+                  panel = { enabled = false },
+                }
+              end,
+            },
+          },
+          config = function() require("copilot_cmp").setup() end,
         },
       },
     }
