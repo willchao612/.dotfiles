@@ -40,6 +40,7 @@ if [ -x "$(command -v exa)" ]; then
   alias ll="exa --icons --long --group --links"
   alias la="exa --icons --long --group --links --all"
 else
+  alias ls="ls --color=auto"
   alias ls="ls -p"
   alias ll="ls -l"
   alias la="ls -A"
@@ -48,6 +49,10 @@ fi
 alias g="git"
 alias v="nvim"
 alias mux="tmuxinator"
+
+alias grep="grep --color=auto"
+alias cp="cp -v"
+alias mv="mv -v"
 
 # vi mode
 bindkey -v
