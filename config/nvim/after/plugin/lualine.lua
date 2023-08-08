@@ -13,7 +13,9 @@ lualine.setup {
     lualine_a = { "buffers" },
     lualine_b = {},
     lualine_c = {},
-    lualine_x = { { navic.get_location, cond = navic.is_available } },
+    lualine_x = {
+      { function() return navic.get_location() end, cond = navic.is_available },
+    },
     lualine_y = {},
     lualine_z = { "tabs" },
   },

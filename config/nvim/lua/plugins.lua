@@ -1,6 +1,6 @@
 --[[
 Author: Will Chao <nerdzzh@gmail.com>
-Last Modified: Wednesday, 12 April 2023
+Last Modified: Sunday, 16 April 2023
 
 Credits: These neovim configs are hugely inspired by
   - @ThePrimeagen/.dotfiles
@@ -274,8 +274,14 @@ return require("packer").startup {
       setup = function() vim.g.mundo_right = 1 end,
       config = function() vim.cmd [[nnoremap <Leader>ud <Cmd>MundoToggle<CR>]] end,
     }
+    use {
+      "rlue/vim-barbaric",
+      setup = function()
+        vim.g.barbaric_ime = "ibus"
+        vim.g.barbaric_default = "xkb:us::eng"
+      end,
+    }
     use "rhysd/clever-f.vim"
-    use "rlue/vim-barbaric"
     use "tpope/vim-repeat"
     use "tpope/vim-surround"
   end,
