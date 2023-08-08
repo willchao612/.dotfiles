@@ -30,6 +30,8 @@ packages=(
   "neovim"
   "net-tools"
   "node"
+  "pyenv"
+  "pyenv-virtualenv"
   "python3"
   "ranger"
   "ripgrep"
