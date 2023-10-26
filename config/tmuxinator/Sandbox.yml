@@ -1,6 +1,0 @@
-name: Sandbox
-root: ~/Personal/Sandbox/
-
-windows:
-  - scratchpad:
-  - editor: nvim .

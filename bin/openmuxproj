@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+proj=$(tmuxinator list | sed -n 2p | tr -s '[:space:]' '\n' | fzf)
+[[ -z $proj ]] || tmuxinator start $proj

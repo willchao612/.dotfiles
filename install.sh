@@ -13,7 +13,7 @@ source install/nvim
 source install/zsh
 source install/tmux
 source install/ranger
-source install/kitty
+source install/yabai
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Switching shell to zsh. You may need to logout.$(tput sgr 0)"

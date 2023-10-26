@@ -1,6 +1,6 @@
 --[[
 Author: Will Chao <nerdzzh@gmail.com>
-Last Modified: Sunday, 16 April 2023
+Last Modified: 星期二, 24 十月 2023
 
 Credits: These neovim configs are hugely inspired by
   - @ThePrimeagen/.dotfiles
@@ -73,12 +73,13 @@ return require("packer").startup {
         { "williamboman/mason.nvim", module = "mason" },
         { "williamboman/mason-lspconfig.nvim", module = "mason-lspconfig" },
         { "simrat39/symbols-outline.nvim", module = "symbols-outline" },
-        { "j-hui/fidget.nvim", module = "fidget" },
+        { "j-hui/fidget.nvim", module = "fidget", tag = "legacy" },
         { "folke/neodev.nvim", module = "neodev" },
       },
     }
 
     -- Treesitter
+    -- TODO: bufdelete is affected?
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
@@ -127,6 +128,7 @@ return require("packer").startup {
           end,
         },
         -- Copilot
+        -- Cocopilot is back!
         {
           "zbirenbaum/copilot-cmp",
           requires = {
@@ -143,6 +145,13 @@ return require("packer").startup {
           },
           config = function() require("copilot_cmp").setup() end,
         },
+        -- Codeium
+        -- {
+        --   "jcdickinson/codeium.nvim",
+        --   requires = { "nvim-lua/plenary.nvim" },
+        --   run = ":Codeium Auth",
+        --   config = function() require("codeium").setup() end,
+        -- },
       },
     }
 
@@ -193,7 +202,15 @@ return require("packer").startup {
       },
     }
     use { "kyazdani42/nvim-tree.lua", module = "nvim-tree" }
-    use { "lukas-reineke/indent-blankline.nvim", module = "indent_blankline" }
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require("ibl").setup {
+          indent = { highlight = "LineNr" },
+          scope = { highlight = "Label" },
+        }
+      end,
+    }
 
     -- Other goodies @folke created
     use { "folke/trouble.nvim", module = "trouble" }
@@ -260,7 +277,12 @@ return require("packer").startup {
       "b3nj5m1n/kommentary",
       setup = function() vim.g.kommentary_create_default_mappings = false end,
     }
-    use { "karb94/neoscroll.nvim", module = "neoscroll" }
+    use {
+      "karb94/neoscroll.nvim",
+      config = function()
+        require("neoscroll").setup { mappings = { "<C-u>", "<C-d>" } }
+      end,
+    }
     use { "norcalli/nvim-colorizer.lua", module = "colorizer" }
     use {
       "godlygeek/tabular",
@@ -274,14 +296,8 @@ return require("packer").startup {
       setup = function() vim.g.mundo_right = 1 end,
       config = function() vim.cmd [[nnoremap <Leader>ud <Cmd>MundoToggle<CR>]] end,
     }
-    use {
-      "rlue/vim-barbaric",
-      setup = function()
-        vim.g.barbaric_ime = "ibus"
-        vim.g.barbaric_default = "xkb:us::eng"
-      end,
-    }
     use "rhysd/clever-f.vim"
+    use "rlue/vim-barbaric"
     use "tpope/vim-repeat"
     use "tpope/vim-surround"
   end,

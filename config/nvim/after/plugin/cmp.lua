@@ -5,7 +5,8 @@ local lspkind = require "lspkind"
 local luasnip = require "luasnip"
 local cmp_dict = require "cmp_dictionary"
 
-lspkind.presets.default.Copilot = ""
+lspkind.presets.default.Codeium = "󰛨"
+lspkind.presets.default.Copilot = "󰛨"
 
 luasnip.config.set_config {
   history = false,
@@ -16,6 +17,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 local source_mapping = {
   buffer = "[Buffer]",
+  codeium = "[Codeium]",
   copilot = "[Copilot]",
   dictionary = "[Dict]",
   luasnip = "[Snip]",
@@ -65,6 +67,7 @@ cmp.setup {
   },
   sources = {
     { name = "buffer" },
+    { name = "codeium", priority = 1000 },
     { name = "copilot" },
     { name = "dictionary" },
     { name = "luasnip" },

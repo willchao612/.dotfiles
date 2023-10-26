@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing tiling window manager.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+brew install koekeishiya/formulae/yabai
+brew install koekeishiya/formulae/skhd
+brew install jq
+
+# brew services start yabai
+# brew services restart yabai
+# brew services start skhd
+# brew services restart skhd
+yabai --start-service
+skhd --start-service
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Yabai installation is complete, you may need to follow the instructions at https://github.com/koekeishiya/yabai/wiki to unlock its full strength.$(tput sgr 0)"
+echo "---------------------------------------------------------"

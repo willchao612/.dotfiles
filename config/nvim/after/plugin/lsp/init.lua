@@ -52,7 +52,7 @@ lspconfig.pyright.setup(config())
 lspconfig.rust_analyzer.setup(config())
 lspconfig.tsserver.setup(config())
 lspconfig.vimls.setup(config())
-lspconfig.vuels.setup(config())
+lspconfig.volar.setup(config())
 
 lspconfig.lua_ls.setup(config {
   settings = {

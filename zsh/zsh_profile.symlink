@@ -7,8 +7,15 @@ export DOTFILES=$HOME/Personal/.dotfiles
 
 export PATH=$PATH:$HOME/.local/bin
 
+# proxy
+export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
+
 # brew
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+eval $(/opt/homebrew/bin/brew shellenv)
+
+# sed
+# use gnu-sed as default sed
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -17,8 +24,8 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # cuda
-export PATH=$PATH:/usr/local/cuda-11.1/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.1/lib64
+# export PATH=$PATH:/usr/local/cuda-11.1/bin
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.1/lib64
 
 # java
 export JAVA_HOME=$(readlink -f $(which java) | sed "s#/jre/bin/java##")

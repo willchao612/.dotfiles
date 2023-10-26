@@ -1,0 +1,97 @@
+# add the command to load the scripting addition at the top of your yabairc config file
+# for this to work you must configure sudo such that it will be able to run the command without password
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# layout
+yabai -m config layout bsp
+yabai -m config window_placement second_child
+yabai -m config window_topmost off
+
+# padding
+yabai -m config top_padding 13
+yabai -m config bottom_padding 13
+yabai -m config left_padding 13
+yabai -m config right_padding 13
+yabai -m config window_gap 13
+
+# appearance
+yabai -m config window_shadow off
+yabai -m config window_opacity off
+# border is removed in latest yabai
+# yabai -m config window_border on
+# yabai -m config window_border_blur on
+# yabai -m config window_border_width 4
+# yabai -m config window_border_radius 13
+# yabai -m config active_window_border_color 0xB300FFCA
+# yabai -m config normal_window_border_color 0xB3B9EDDD
+# commeted off cuz smh it slows down my mac and causes glitches
+# yabai -m config window_opacity on
+# yabai -m config active_window_opacity 0.9
+# yabai -m config normal_window_opacity 0.7
+# yabai -m config window_opacity_duration 0.1
+# yabai -m config window_animation_duration 0.1
+
+# mouse
+# yabai -m config focus_follows_mouse autofocus
+yabai -m config focus_follows_mouse off
+yabai -m config mouse_follows_focus off
+yabai -m config mouse_modifier alt
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config mouse_drop_action swap
+
+# space label
+yabai -m space 1 --label file
+yabai -m space 2 --label term
+yabai -m space 3 --label web1
+yabai -m space 4 --label chat
+yabai -m space 5 --label music
+yabai -m space 6 --label code
+yabai -m space 7 --label note
+yabai -m space 8 --label sysutil
+yabai -m space 9 --label office
+yabai -m space 10 --label misc
+yabai -m space 11 --label pdf
+yabai -m space 12 --label web2
+
+# space config
+yabai -m config --space music layout stack
+yabai -m config --space note layout stack
+yabai -m config --space office layout stack
+yabai -m config --space misc layout stack
+yabai -m config --space pdf layout stack
+
+# whitelist
+yabai -m rule --add app="^(System Preferences|系统设置|System Information|系统信息)$" manage=off sticky=on
+yabai -m rule --add app="^Raycast$" manage=off sticky=on
+yabai -m rule --add app="^App Store$" manage=off sticky=on
+yabai -m rule --add app="^Dynamic Wallpaper$" manage=off sticky=on
+yabai -m rule --add app="^Bartender 4$" manage=off sticky=on
+yabai -m rule --add app="^(Activity Monitor|活动监视器)$" manage=off sticky=on
+yabai -m rule --add app="^(IINA|mpv)$" manage=off sticky=on
+yabai -m rule --add app="^(Preview|预览|Pixea)$" manage=off sticky=on
+yabai -m rule --add app="^DeepL$" manage=off sticky=on
+yabai -m rule --add app="^(Typora|MacDown|TextEdit|文本编辑)$" manage=off sticky=on
+yabai -m rule --add app="^腾讯会议$" manage=off sticky=on
+
+# app
+# yabai -m rule --add app="^(Finder|访达)$" space=file
+# yabai -m rule --add app="^iTerm2$" space=term
+# yabai -m rule --add app="^(Google Chrome|Safari)$" space=web1
+yabai -m rule --add app="^(WeChat|微信|QQ|Telegram Lite)$" space=chat manage=off
+yabai -m rule --add app="^(Spotify|喜马拉雅)$" space=music
+yabai -m rule --add app="^(Code - Insiders|Postman)$" space=code
+yabai -m rule --add app="^(Notion|Notability|腾讯文档)$" space=note
+yabai -m rule --add app="^(Mail|邮件|Notes|备忘录|Calendar|日历)$" space=sysutil
+yabai -m rule --add app="^Microsoft (Word|PowerPoint|Excel)$" space=office
+yabai -m rule --add app="^(PDF Expert|Zotero)$" space=pdf
+
+# signals; i took it from @koekeishiya
+yabai -m signal --add event=window_destroyed active=yes action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null"
+yabai -m signal --add event=window_minimized active=yes action="if \$(yabai -m query --windows --window \$YABAI_WINDOW_ID | jq -r '.\"is-floating\"'); then yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null; fi"
+
+# todo
+#
+# open apps on startup (inspiration: https://blanboom.org/2019/yabai/) using
+# script and call it

@@ -10,3 +10,22 @@ echo "$(tput setaf 2)JARVIS: Installing node neovim package$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 npm install -g neovim
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing binaries used by neoformat$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+brew install stylua shfmt
+npm install -g clang-format prettier
+pip3 install --upgrade yapf
+rustup component add rustfmt
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing xkbswitch-macosx$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+if [ ! -f /usr/local/bin/xkbswitch ]; then
+  wget -P /tmp/ https://raw.githubusercontent.com/myshov/xkbswitch-macosx/master/bin/xkbswitch
+  chmod +x /tmp/xkbswitch
+  sudo mv /tmp/xkbswitch /usr/local/bin/
+fi

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing npm packages.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+npm install -g commitizen cz-conventional-changelog
+echo '{ "path": "cz-conventional-changelog" }' >~/.czrc

@@ -7,11 +7,16 @@ vim.cmd [[iabbrev <buffer> h4 ####]]
 vim.cmd [[iabbrev <buffer> h5 #####]]
 vim.cmd [[iabbrev <buffer> h6 ######]]
 
-if vim.fn.executable "typora" then
-  vim.keymap.set(
-    "n",
-    "<Leader>O",
-    "<Cmd>silent !typora %<CR>",
-    { noremap = true, buffer = true, silent = true }
-  )
+local typora_cmd
+if vim.fn.has "macunix" == 1 then
+  typora_cmd = "<Cmd>silent !open -a typora %<CR>"
+elseif vim.fn.executable "typora" then
+  typora_cmd = "<Cmd>silent !typora %<CR>"
 end
+
+vim.keymap.set(
+  "n",
+  "<Leader>O",
+  typora_cmd,
+  { noremap = true, buffer = true, silent = true }
+)

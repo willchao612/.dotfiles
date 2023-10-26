@@ -1,6 +1,11 @@
 local ok, signs = pcall(require, "gitsigns")
 if not ok then return end
 
+local Remap = require "nerdzzh.keymap"
+local nnoremap = Remap.nnoremap
+local onoremap = Remap.onoremap
+local xnoremap = Remap.xnoremap
+
 signs.setup {
   signs = {
     add = {
@@ -34,23 +39,28 @@ signs.setup {
       linehl = "GitSignsChangeLn",
     },
   },
-  keymaps = {
-    noremap = true,
-    buffer = true,
-    ["n ]c"] = {
-      expr = true,
+  on_attach = function(bufnr)
+    -- navigation
+    -- TODO: Why this is not working?
+    nnoremap {
+      "]c",
       "&diff ? ']c' : '<Cmd>lua require\"gitsigns\".next_hunk()<CR>'",
-    },
-    ["n [c"] = {
-      expr = true,
+      { expr = true },
+    }
+    nnoremap {
+      "[c",
       "&diff ? '[c' : '<Cmd>lua require\"gitsigns\".prev_hunk()<CR>'",
-    },
-    ["n <Leader>gp"] = '<Cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ["n <Leader>gb"] = '<Cmd>lua require"gitsigns".blame_line()<CR>',
-    ["n <Leader>gd"] = '<Cmd>lua require"gitsigns".diffthis()<CR>',
-    -- Text objects
-    ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
-    ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
-  },
+      { expr = true },
+    }
+
+    -- actions
+    nnoremap { "<Leader>gp", '<Cmd>lua require"gitsigns".preview_hunk()<CR>' }
+    nnoremap { "<Leader>gb", '<Cmd>lua require"gitsigns".blame_line()<CR>' }
+    nnoremap { "<Leader>gd", '<Cmd>lua require"gitsigns".diffthis()<CR>' }
+
+    -- text objects
+    onoremap { "ih", ':<C-U>lua require"gitsigns".select_hunk()<CR>' }
+    xnoremap { "ih", ':<C-U>lua require"gitsigns".select_hunk()<CR>' }
+  end,
   current_line_blame = true,
 }

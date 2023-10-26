@@ -2,7 +2,7 @@
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Checking for Homebrew installation.$(tput sgr 0)"
 echo "---------------------------------------------------------"
-brew="/home/linuxbrew/.linuxbrew/bin/brew"
+brew="/opt/homebrew/bin/brew"
 if [ -f "$brew" ]; then
   echo "---------------------------------------------------------"
   echo "$(tput setaf 2)JARVIS: Homebrew is installed.$(tput sgr 0)"
@@ -26,21 +26,27 @@ packages=(
   "fzf"
   "gcc"
   "git"
+  "gnu-sed"
   "htop"
+  "lua"
+  "mpv"
+  "neofetch"
   "neovim"
-  "net-tools"
   "node"
   "pyenv"
   "pyenv-virtualenv"
   "python3"
   "ranger"
   "ripgrep"
+  "ruby"
   "starship"
   "tig"
   "tldr"
   "tmux"
   "tmuxinator"
+  "wget"
   "xsel"
+  "yt-dlp"
   "zsh"
 )
 
@@ -48,3 +54,16 @@ for i in "${packages[@]}"; do
   brew install $i
   echo "---------------------------------------------------------"
 done
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Enabling keybindings and fuzzy completion for fzf.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+[ -f ~/.fzf.zsh ] || /opt/homebrew/opt/fzf/install
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing system fonts.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+brew tap homebrew/cask-fonts
+brew install font-jetbrains-mono-nerd-font font-maple

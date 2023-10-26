@@ -1,0 +1,6 @@
+name: Scratchpad
+root: ~/Personal/scratchpad/
+
+windows:
+  - scratchpad: nvim .
+  - files: ranger

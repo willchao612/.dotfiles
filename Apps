@@ -1,8 +1,34 @@
-albert
-avidemux
-fcitx
-latte-dock-git
-mpv
-peek
-unar
-zathura
+# ubuntu
+Albert # app launcher
+latte-dock-git # dock
+Zathura # pdf reader
+mpv # video player
+Avidemux # video editor
+Fcitx # ime
+Peek # gif
+unar # zip
+
+# mac
+Raycast # app launcher
+ClashX # vpn
+iTerm # terminal
+Microsoft Office 365 # office
+Maccy # clipboard
+MonitorControl # monitor control
+KeyCastr # casting keys
+Snipaste # screenshot
+The Unarchiver # zip
+EasyRes # resolution
+Bartender # menubar
+Macdown # markdown
+Typora # markdown
+PDF Expert # pdf reader/editor
+IINA # video
+Pixea # image
+iShot Pro # screenshot
+CleanShot X # screenshot
+Dynamic Wallpaper # wallpaper
+Magic Battery # battery
+alist-desktop # cloud drive mounting
+MouseBoost PRO # context menu
+DockView # dock preview

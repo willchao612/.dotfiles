@@ -5,3 +5,4 @@ sessions/
 tmp/
 watch_later
 config/ranger/plugins
+.DS_Store

@@ -1,0 +1,8 @@
+name: web_services_hw1
+root: ~/Work/web-services-hw1/
+
+windows:
+  - scratchpad:
+  - editor: nvim .
+  - server: npm run dev
+  - api:
